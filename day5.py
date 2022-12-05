@@ -52,6 +52,17 @@ print(f"Ans 1: {soln1}")
 
 ### PART TWO ###
 
+stacks2 = deepcopy(stacks_copy)  # restores original copy of stack
 
+# Execute Order 67
+for command in commands:
+    crates, origin, dest = command
 
-#print(f"Ans 2: {soln2}")
+    buffer = []
+    for i in range(crates):    
+        buffer.append(stacks2[origin-1].pop()) 
+    stacks2[dest-1].extend(buffer[::-1])  # flip the buffer and add to destination stack
+
+soln2 = ''.join([x[-1] for x in stacks2])
+print(f"Ans 2: {soln2}")
+
