@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 fp = 'aoc2022/day5.txt'
 
 with open(fp,'r') as f:
@@ -33,6 +35,8 @@ for i in range(num_stacks):
             stack.append(ele)
     stacks.append(stack)
 
+stacks_copy = deepcopy(stacks)  # creates copy of original stack for use in Part Two
+
 # Transform command set
 commands = []
 for row in input_commands:
@@ -65,4 +69,3 @@ for command in commands:
 
 soln2 = ''.join([x[-1] for x in stacks2])
 print(f"Ans 2: {soln2}")
-
