@@ -51,8 +51,12 @@ class trees():
         return count
 
 
-
 trees = trees()
 #print(trees.grid[1][1:-1])
 soln1 = trees.count_visible()
 print(f"Ans 1: {soln1}") 
+
+
+### PART TWO ###
+
+# TODO
