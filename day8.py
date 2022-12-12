@@ -1,5 +1,5 @@
 fp = 'aoc2022/day8.txt'
-fp = 'aoc2022/day8_testcase.txt'
+#fp = 'aoc2022/day8_testcase.txt'
 
 with open(fp,'r') as f:
     input = f.read().splitlines()
@@ -51,12 +51,50 @@ class trees():
         return count
 
 
+    ## PART TWO FUNCTIONS ##
+
+    def scenic_score(self, i,j):
+        """
+        Returns Scenic Score of tree located at coords (i,j)
+        """
+        # for the case of outer edges of the grid
+        if (i == 0) or (i == self.height-1) or (j == 0) or (j == self.width-1):
+            return 0  # all trees at the edge have score 0
+    
+
+        # check the NSEW visibility, oriented from origin i,j
+
+        view_n = [x[j] for x in self.grid[:i]][::-1]
+        view_s = [x[j] for x in self.grid[i+1:]]
+        view_e = [x for x in self.grid[i][j+1:]]
+        view_w = [x for x in self.grid[i][:j]][::-1]
+
+        views = [view_n, view_w, view_s, view_e]
+
+        score = 1
+        ht = self.grid[i][j] # current height
+
+        for idx_view,view in enumerate(views):
+            for idx,val in enumerate(view):
+                if val >= ht:
+                    print(1,idx+1)
+                    break  # stops current view, multiples the score, and jumps to next loop/view 
+            score *= (idx+1)  # this is the number of trees
+
+        return score
+    
+
+    def max_scenic_score(self):
+        return max([self.scenic_score(i,j) for i,row in enumerate(self.grid) for j, col in enumerate(row)])
+
+
+
 trees = trees()
-#print(trees.grid[1][1:-1])
+
 soln1 = trees.count_visible()
 print(f"Ans 1: {soln1}") 
 
 
 ### PART TWO ###
-
-# TODO
+soln2 = trees.max_scenic_score()
+print(f"Ans 2: {soln2}") 
