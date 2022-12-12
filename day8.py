@@ -77,7 +77,6 @@ class trees():
         for idx_view,view in enumerate(views):
             for idx,val in enumerate(view):
                 if val >= ht:
-                    print(1,idx+1)
                     break  # stops current view, multiples the score, and jumps to next loop/view 
             score *= (idx+1)  # this is the number of trees
 
